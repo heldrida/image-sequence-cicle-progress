@@ -16,6 +16,12 @@ Shoe360View.prototype = {
 
 	initVars: function () {
 
+		// since we're assigning a native method to a property of custom object,
+		// when called change context to the context of window
+		this.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+		                            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+		this.cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
+
 		this.imageSequencerBox = document.querySelector('.image-sequencer-box');
 		this.percentage = 0;
 		this.circleProgress = 0;
@@ -30,12 +36,14 @@ Shoe360View.prototype = {
 
 	attachEventListeners: function () {
 
-		this.imageSequencerBox.addEventListener("touchstart", this.handleStart.bind(this), false);
+		this.imageSequencerBox.addEventListener("touchstart", this.touchStartHandler.bind(this), false);
+		this.imageSequencerBox.addEventListener("touchend", this.touchEndHandler.bind(this), false);
+
 		/*
+		this.imageSequencerBox.addEventListener("touchmove", this.handleMove.bind(this), false);
 		this.imageSequencerBox.addEventListener("touchend", handleEnd, false);
 		this.imageSequencerBox.addEventListener("touchcancel", handleCancel, false);
 		this.imageSequencerBox.addEventListener("touchleave", handleEnd, false);
-		this.imageSequencerBox.addEventListener("touchmove", handleMove, false);
 		*/
 
 	},
@@ -103,13 +111,27 @@ Shoe360View.prototype = {
 		this.setProgressPath(this.percentage);
 		this.setImageByPercentage(this.percentage);
 
-		window.requestAnimationFrame(this.loop.bind(this));
+		if (typeof this.r === "undefined") {
+			this.rAf = this.requestAnimationFrame.call(window, this.loop.bind(this));
+		}
 
 		//console.log(window.countFPS());
 
 	},
 
-	handleStart: function (e) {
+	touchStartHandler: function (e) {
+
+		this.cancelAnimationFrame.call(window, this.rAf);
+
+	},
+
+	touchEndHandler: function (e) {
+
+		this.rAf = this.requestAnimationFrame.call(window, this.loop.bind(this));
+
+	},
+
+	touchMoveHandle: function (e) {
 
 		console.log(e);
 
