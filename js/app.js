@@ -23,6 +23,7 @@ Shoe360View.prototype = {
 		this.calcCircleStroke();
 		this.pointerOffsetDeg = 90;
 		this.pointer = document.querySelector('.pointer');
+		this.images = document.querySelectorAll('.images-container img');
 
 	},
 
@@ -59,6 +60,27 @@ Shoe360View.prototype = {
 
 	},
 
+	setImageByPercentage: function (percentage) {
+
+		var index = Math.ceil(this.images.length * (percentage / 100));
+
+		if (index === 0) {
+			return;
+		}
+
+		// hide all
+		for (var i = 0; i < this.images.length; i++) {
+			this.images[i].style.display = 'none';
+
+			// display current
+			if (index === i) {
+				this.images[i].style.display = 'block';
+			}
+
+		}
+
+	},
+
 	loop: function () {
 
 		if (this.percentage >= 100) {
@@ -68,9 +90,14 @@ Shoe360View.prototype = {
 		}
 
 		this.setProgressPath(this.percentage);
+		this.setImageByPercentage(this.percentage);
 
 		window.requestAnimationFrame(this.loop.bind(this));
 
+		/*
+		this.setProgressPath(75);
+		this.setImageByPercentage(75);
+		*/
 	}
 
 };

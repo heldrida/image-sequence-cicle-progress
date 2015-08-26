@@ -27,8 +27,14 @@
 		</div>
 
 		<div class="images-container">
-			<?php for ($i = 0; $i <= 342; $i++) : ?>
-			<img src="img/720x576/<?php echo $i < 10 ? '000' . $i : ($i < 100 ?  '00' . $i : '0' . $i); ?>.jpg" alt="">
+			<?php for ($i = 1; $i <= 342; $i++) : ?>
+				<?php if ($i < 10) : ?>
+				<img src="img/720x576/<?php echo '000' . $i; ?>.jpg" data-index="<?php echo $i ?>">
+				<?php elseif ($i < 100) : ?>
+				<img src="img/720x576/<?php echo '00' . $i; ?>.jpg" data-index="<?php echo $i ?>">
+				<?php else : ?>
+				<img src="img/720x576/<?php echo '0' . $i; ?>.jpg" data-index="<?php echo $i ?>">
+				<?php endif; ?>
 			<?php endfor; ?>
 		</div>
 

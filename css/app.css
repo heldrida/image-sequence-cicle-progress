@@ -46,40 +46,52 @@
                                              (http://www.w3schools.com/cssref/css3_pr_animation.asp)
 
 ------------------------------------------------------------- */
-.image-sequencer-box .progress-container {
+.image-sequencer-box {
   width: 600px;
   height: 600px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  margin: 0 auto;
-  -webkit-transform: rotateZ(270deg);
-  -khtml-transform: rotateZ(270deg);
-  -moz-transform: rotateZ(270deg);
-  -ms-transform: rotateZ(270deg);
-  -o-transform: rotateZ(270deg);
-  transform: rotateZ(270deg); }
-  .image-sequencer-box .progress-container .pointer {
+  background: #000; }
+  .image-sequencer-box .progress-container {
+    width: 600px;
+    height: 600px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 18px;
-    height: 50%;
-    margin-left: -9px;
-    -webkit-transform: rotateZ(-90deg);
-    -khtml-transform: rotateZ(-90deg);
-    -moz-transform: rotateZ(-90deg);
-    -ms-transform: rotateZ(-90deg);
-    -o-transform: rotateZ(-90deg);
-    transform: rotateZ(-90deg);
-    transform-origin: top center; }
-    .image-sequencer-box .progress-container .pointer svg {
+    top: 0;
+    left: 0;
+    margin: 0 auto;
+    -webkit-transform: rotateZ(270deg);
+    -khtml-transform: rotateZ(270deg);
+    -moz-transform: rotateZ(270deg);
+    -ms-transform: rotateZ(270deg);
+    -o-transform: rotateZ(270deg);
+    transform: rotateZ(270deg);
+    z-index: 2; }
+    .image-sequencer-box .progress-container .pointer {
       position: absolute;
-      margin-top: -100%;
-      margin-left: -5px;
-      top: 100%; }
-
-.image-sequencer-box .images-container {
-  background: yellow;
-  width: 100%;
-  height: 100%; }
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 50%;
+      margin-left: -9px;
+      -webkit-transform: rotateZ(-90deg);
+      -khtml-transform: rotateZ(-90deg);
+      -moz-transform: rotateZ(-90deg);
+      -ms-transform: rotateZ(-90deg);
+      -o-transform: rotateZ(-90deg);
+      transform: rotateZ(-90deg);
+      transform-origin: top center; }
+      .image-sequencer-box .progress-container .pointer svg {
+        position: absolute;
+        margin-top: -100%;
+        margin-left: -5px;
+        top: 100%; }
+  .image-sequencer-box .images-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 1; }
+    .image-sequencer-box .images-container img {
+      display: none;
+      width: 100%;
+      height: auto;
+      position: relative;
+      top: 40px;
+      left: 0; }
