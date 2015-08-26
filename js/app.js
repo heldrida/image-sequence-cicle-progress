@@ -146,7 +146,7 @@ Shoe360View.prototype = {
 				this.touchStart = this.touchEnd;
 			}
 
-			console.log('left');
+			this.setImageByTouchMove('left');
 
 		} else {
 
@@ -155,11 +155,26 @@ Shoe360View.prototype = {
 				this.touchStart = this.touchEnd;
 			}
 
-			console.log('right');
+			this.setImageByTouchMove('right');
 
 		}
 
 		this.touchEnd = e.touches[0].pageX;
+
+	},
+
+	setImageByTouchMove: function (direction) {
+
+		if (this.percentage < 0) {
+			this.percentage = 100;
+		} else if (this.percentage > 100) {
+			this.percentage = 0;
+		}
+
+		this.percentage = direction === 'right' ? (this.percentage + 1) : (this.percentage - 1);
+		console.log('this.percentage', this.percentage);
+		this.setProgressPath(this.percentage);
+		this.setImageByPercentage(this.percentage);
 
 	}
 
