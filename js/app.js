@@ -16,6 +16,7 @@ Shoe360View.prototype = {
 
 	initVars: function () {
 
+		this.imageSequencerBox = document.querySelector('.image-sequencer-box');
 		this.percentage = 0;
 		this.circleProgress = 0;
 		this.circlePath = document.querySelector('.circle-path');
@@ -29,6 +30,13 @@ Shoe360View.prototype = {
 
 	attachEventListeners: function () {
 
+		this.imageSequencerBox.addEventListener("touchstart", this.handleStart.bind(this), false);
+		/*
+		this.imageSequencerBox.addEventListener("touchend", handleEnd, false);
+		this.imageSequencerBox.addEventListener("touchcancel", handleCancel, false);
+		this.imageSequencerBox.addEventListener("touchleave", handleEnd, false);
+		this.imageSequencerBox.addEventListener("touchmove", handleMove, false);
+		*/
 
 	},
 
@@ -69,6 +77,9 @@ Shoe360View.prototype = {
 		}
 
 		// hide all
+		// todo: maybe it's better to change the zIndex using the `index` value that goes up
+		// and only when reaching the `end` hide all. This should perform a bit better then
+		// the current `hide all` display only current `index`
 		for (var i = 0; i < this.images.length; i++) {
 			this.images[i].style.display = 'none';
 
@@ -94,12 +105,14 @@ Shoe360View.prototype = {
 
 		window.requestAnimationFrame(this.loop.bind(this));
 
-		console.log(window.countFPS());
+		//console.log(window.countFPS());
 
-		/*
-		this.setProgressPath(75);
-		this.setImageByPercentage(75);
-		*/
+	},
+
+	handleStart: function (e) {
+
+		console.log(e);
+
 	}
 
 };
