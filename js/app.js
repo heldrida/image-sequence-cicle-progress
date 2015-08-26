@@ -33,6 +33,7 @@ Shoe360View.prototype = {
 		this.images = document.querySelectorAll('.images-container img');
 		this.touchStart = 0;
 		this.touchEnd = 0;
+		this.throttleMs = 75;
 
 	},
 
@@ -40,7 +41,7 @@ Shoe360View.prototype = {
 
 		this.imageSequencerBox.addEventListener("touchstart", this.touchStartHandler.bind(this), false);
 		this.imageSequencerBox.addEventListener("touchend", this.touchEndHandler.bind(this), false);
-		this.imageSequencerBox.addEventListener("touchmove", this.touchMoveHandle.bind(this), false);
+		this.imageSequencerBox.addEventListener("touchmove", this.throttle(this.touchMoveHandle.bind(this), this.throttleMs), false);
 
 		/*
 		this.imageSequencerBox.addEventListener("touchend", handleEnd, false);
@@ -180,6 +181,18 @@ Shoe360View.prototype = {
 		this.setProgressPath(this.percentage);
 		this.setImageByPercentage(this.percentage);
 
+	},
+
+	throttle: function (func, ms) {
+		var last = 0;
+			return function () {
+				var a = arguments, t = this, now = +(new Date());
+				//b/c last = 0 will still run the first time called
+				if(now >= last + ms){
+					last = now;
+					func.apply(t, a);
+				}
+		};
 	}
 
 };
