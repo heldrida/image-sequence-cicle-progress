@@ -138,6 +138,8 @@ Shoe360View.prototype = {
 
 		e.preventDefault();
 
+		var direction;
+
 		// detect if moving left or right
 		if (this.touchStart > e.touches[0].pageX) {
 
@@ -146,7 +148,7 @@ Shoe360View.prototype = {
 				this.touchStart = this.touchEnd;
 			}
 
-			this.setImageByTouchMove('left');
+			direction = 'left';
 
 		} else {
 
@@ -155,9 +157,11 @@ Shoe360View.prototype = {
 				this.touchStart = this.touchEnd;
 			}
 
-			this.setImageByTouchMove('right');
+			direction = 'right';
 
 		}
+
+		this.setImageByTouchMove(direction);
 
 		this.touchEnd = e.touches[0].pageX;
 
@@ -172,7 +176,7 @@ Shoe360View.prototype = {
 		}
 
 		this.percentage = direction === 'right' ? (this.percentage + 1) : (this.percentage - 1);
-		console.log('this.percentage', this.percentage);
+
 		this.setProgressPath(this.percentage);
 		this.setImageByPercentage(this.percentage);
 
