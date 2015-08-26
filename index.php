@@ -27,7 +27,9 @@
 		</div>
 
 		<div class="images-container">
-			<img src="img/720x576/0100.jpg" alt="">
+			<?php for ($i = 0; $i <= 342; $i++) : ?>
+			<img src="img/720x576/<?php echo $i < 10 ? '000' . $i : ($i < 100 ?  '00' . $i : '0' . $i); ?>.jpg" alt="">
+			<?php endfor; ?>
 		</div>
 
 	</div>
