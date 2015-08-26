@@ -4,10 +4,10 @@
 	width: 600px;
 	height: 600px;
 	position: relative;
+	margin: 0 auto;
 	@include transform(rotateZ(270deg));
 
 	.pointer {
-		background: yellow;
 		position: absolute;
 		top: 50%;
 		left: 50%;
@@ -20,6 +20,7 @@
 		svg {
 			position: absolute;
 			margin-top: -100%;
+			margin-left: -5px;
 			top: 100%;
 		}
 	}

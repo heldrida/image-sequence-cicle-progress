@@ -50,6 +50,7 @@
   width: 600px;
   height: 600px;
   position: relative;
+  margin: 0 auto;
   -webkit-transform: rotateZ(270deg);
   -khtml-transform: rotateZ(270deg);
   -moz-transform: rotateZ(270deg);
@@ -57,7 +58,6 @@
   -o-transform: rotateZ(270deg);
   transform: rotateZ(270deg); }
   .progress-container .pointer {
-    background: yellow;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -74,4 +74,5 @@
     .progress-container .pointer svg {
       position: absolute;
       margin-top: -100%;
+      margin-left: -5px;
       top: 100%; }
