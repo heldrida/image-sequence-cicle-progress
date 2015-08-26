@@ -31,6 +31,8 @@ Shoe360View.prototype = {
 		this.pointerOffsetDeg = 90;
 		this.pointer = document.querySelector('.pointer');
 		this.images = document.querySelectorAll('.images-container img');
+		this.touchStart = 0;
+		this.touchEnd = 0;
 
 	},
 
@@ -38,9 +40,9 @@ Shoe360View.prototype = {
 
 		this.imageSequencerBox.addEventListener("touchstart", this.touchStartHandler.bind(this), false);
 		this.imageSequencerBox.addEventListener("touchend", this.touchEndHandler.bind(this), false);
+		this.imageSequencerBox.addEventListener("touchmove", this.touchMoveHandle.bind(this), false);
 
 		/*
-		this.imageSequencerBox.addEventListener("touchmove", this.handleMove.bind(this), false);
 		this.imageSequencerBox.addEventListener("touchend", handleEnd, false);
 		this.imageSequencerBox.addEventListener("touchcancel", handleCancel, false);
 		this.imageSequencerBox.addEventListener("touchleave", handleEnd, false);
@@ -121,6 +123,7 @@ Shoe360View.prototype = {
 
 	touchStartHandler: function (e) {
 
+		this.touchStart = e.touches[0].pageX;
 		this.cancelAnimationFrame.call(window, this.rAf);
 
 	},
@@ -133,7 +136,30 @@ Shoe360View.prototype = {
 
 	touchMoveHandle: function (e) {
 
-		console.log(e);
+		e.preventDefault();
+
+		// detect if moving left or right
+		if (this.touchStart > e.touches[0].pageX) {
+
+			// detect if the user changes initial direction
+			if (this.touchEnd < e.touches[0].pageX) {
+				this.touchStart = this.touchEnd;
+			}
+
+			console.log('left');
+
+		} else {
+
+			// detect if the user changes initial direction
+			if (this.touchEnd > e.touches[0].pageX) {
+				this.touchStart = this.touchEnd;
+			}
+
+			console.log('right');
+
+		}
+
+		this.touchEnd = e.touches[0].pageX;
 
 	}
 
