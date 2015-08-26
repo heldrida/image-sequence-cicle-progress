@@ -1,0 +1,23 @@
+@import "css3-mixins";
+
+.progress-container {
+	position: relative;
+	@include transform(rotateZ(270deg));
+
+	.pointer {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 5%;
+		height: 50%;
+		margin-left: -2.5%;
+		@include transform(rotateZ(-90deg));
+		transform-origin: top center;
+
+		svg {
+			position: absolute;
+			margin-top: -100%;
+			top: 100%;
+		}
+	}
+}
