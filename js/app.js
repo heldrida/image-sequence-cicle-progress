@@ -94,6 +94,8 @@ Shoe360View.prototype = {
 
 		window.requestAnimationFrame(this.loop.bind(this));
 
+		console.log(window.countFPS());
+
 		/*
 		this.setProgressPath(75);
 		this.setImageByPercentage(75);
@@ -109,3 +111,21 @@ document.addEventListener("DOMContentLoaded", function(e) {
 	window.shoe360View = shoe360View;
 
 });
+
+window.countFPS = (function () {
+  var lastLoop = (new Date()).getMilliseconds();
+  var count = 1;
+  var fps = 0;
+
+  return function () {
+    var currentLoop = (new Date()).getMilliseconds();
+    if (lastLoop > currentLoop) {
+      fps = count;
+      count = 1;
+    } else {
+      count += 1;
+    }
+    lastLoop = currentLoop;
+    return fps;
+  };
+}());
