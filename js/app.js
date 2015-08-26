@@ -9,6 +9,7 @@ Shoe360View.prototype = {
 	init: function () {
 
 		this.initVars();
+		this.attachEventListeners();
 		this.loop();
 
 	},
@@ -22,6 +23,11 @@ Shoe360View.prototype = {
 		this.calcCircleStroke();
 		this.pointerOffsetDeg = 90;
 		this.pointer = document.querySelector('.pointer');
+
+	},
+
+	attachEventListeners: function () {
+
 
 	},
 
@@ -55,18 +61,15 @@ Shoe360View.prototype = {
 
 	loop: function () {
 
-		// todo: check `update by image sequence percentage`
-		setInterval(function () {
+		if (this.percentage >= 100) {
+			this.percentage = 0;
+		} else {
+			this.percentage += 0.1;
+		}
 
-			if (this.percentage >= 100) {
-				this.percentage = 0;
-			} else {
-				this.percentage += 0.1;
-			}
+		this.setProgressPath(this.percentage);
 
-			this.setProgressPath(this.percentage);
-
-		}.bind(this), 10);
+		window.requestAnimationFrame(this.loop.bind(this));
 
 	}
 
