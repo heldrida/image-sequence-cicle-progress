@@ -41,6 +41,7 @@
 
 	</div>
 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 
 </body>
