@@ -8,6 +8,7 @@ Shoe360View.prototype = {
 
 	init: function () {
 
+		this.emulateTouchEvents = true;
 		this.initVars();
 		this.attachEventListeners();
 		this.loop();
@@ -39,15 +40,21 @@ Shoe360View.prototype = {
 
 	attachEventListeners: function () {
 
-		this.imageSequencerBox.addEventListener("touchstart", this.touchStartHandler.bind(this), false);
-		this.imageSequencerBox.addEventListener("touchend", this.touchEndHandler.bind(this), false);
-		this.imageSequencerBox.addEventListener("touchmove", this.throttle(this.touchMoveHandle.bind(this), this.throttleMs), false);
+		if (this.emulateTouchEvents) {
 
-		/*
-		this.imageSequencerBox.addEventListener("touchend", handleEnd, false);
-		this.imageSequencerBox.addEventListener("touchcancel", handleCancel, false);
-		this.imageSequencerBox.addEventListener("touchleave", handleEnd, false);
-		*/
+			var hammer = new Hammer(this.imageSequencerBox);
+
+			hammer.on("panstart", this.panStartHandler.bind(this), false);
+			hammer.on("panend", this.panEndHandler.bind(this), false);
+			hammer.on("panmove", this.throttle(this.panMoveHandle.bind(this), this.throttleMs), false);
+
+		} else {
+
+			this.imageSequencerBox.addEventListener("touchstart", this.touchStartHandler.bind(this), false);
+			this.imageSequencerBox.addEventListener("touchend", this.touchEndHandler.bind(this), false);
+			this.imageSequencerBox.addEventListener("touchmove", this.throttle(this.touchMoveHandle.bind(this), this.throttleMs), false);
+
+		}
 
 	},
 
@@ -165,6 +172,39 @@ Shoe360View.prototype = {
 		this.setImageByTouchMove(direction);
 
 		this.touchEnd = e.touches[0].pageX;
+
+	},
+
+	panStartHandler: function (e) {
+
+		this.cancelAnimationFrame.call(window, this.rAf);
+
+	},
+
+	panEndHandler: function (e) {
+
+		this.rAf = this.requestAnimationFrame.call(window, this.loop.bind(this));
+
+	},
+
+	panMoveHandle: function (e) {
+
+		e.preventDefault();
+
+		var direction;
+
+		// detect if moving left or right
+		if (e.deltaX < 0) {
+
+			direction = 'left';
+
+		} else {
+
+			direction = 'right';
+
+		}
+
+		this.setImageByTouchMove(direction);
 
 	},
 

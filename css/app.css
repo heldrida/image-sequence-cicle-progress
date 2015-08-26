@@ -53,6 +53,8 @@
   position: relative;
   cursor: pointer;
   cursor: -webkit-grab; }
+  .image-sequencer-box * {
+    pointer-events: none; }
   .image-sequencer-box .progress-container {
     width: 600px;
     height: 600px;

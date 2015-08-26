@@ -8,6 +8,10 @@
 	cursor: pointer;
 	cursor: -webkit-grab;
 
+	* {
+		pointer-events: none;
+	}
+
 	.progress-container {
 		width: 600px;
 		height: 600px;
