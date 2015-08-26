@@ -29,11 +29,11 @@ Shoe360View.prototype = {
 
 		this.percentage = 0;
 		this.circleProgress = 0;
-		this.circlePath = document.querySelector('.shoe-360 .circle-path');
+		this.circlePath = document.querySelector('.circle-path');
 		this.circlePathLength = this.circlePath.getTotalLength();
 		this.calcCircleStroke();
 		this.pointerOffsetDeg = 90;
-		this.pointer = document.querySelector('.shoe-360 .pointer');
+		this.pointer = document.querySelector('.pointer');
 
 	},
 
