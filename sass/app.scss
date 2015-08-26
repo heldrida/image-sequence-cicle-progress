@@ -5,6 +5,8 @@
 	height: 600px;
 	background: #000;
 	position: relative;
+	cursor: pointer;
+	cursor: -webkit-grab;
 
 	.progress-container {
 		width: 600px;

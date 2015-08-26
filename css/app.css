@@ -50,7 +50,9 @@
   width: 600px;
   height: 600px;
   background: #000;
-  position: relative; }
+  position: relative;
+  cursor: pointer;
+  cursor: -webkit-grab; }
   .image-sequencer-box .progress-container {
     width: 600px;
     height: 600px;
