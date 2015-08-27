@@ -11,7 +11,7 @@ Shoe360View.prototype = {
 		this.emulateTouchEvents = true;
 		this.initVars();
 		this.attachEventListeners();
-		this.loop();
+		//this.loop();
 		this.setProgressContainerSize();
 		this.preloadImages();
 
@@ -317,6 +317,7 @@ Shoe360View.prototype = {
 
 	preloadImages: function () {
 
+		// todo: by default the container should not be visible, once loaded show it
 		var imgLoad = imagesLoaded(this.imagesContainer);
 
 		imgLoad.on( 'progress', function( instance, image ) {
@@ -324,13 +325,14 @@ Shoe360View.prototype = {
 			console.log( 'image is ' + result + ' for ' + image.img.src );
 		});
 
-		imgLoad.on( 'done', function( instance ) {
-			console.log('DONE  - all images have been successfully loaded');
+		imgLoad.on( 'done', function() {
+
 		});
 
 		imgLoad.on( 'always', function( instance ) {
 			console.log('ALWAYS - all images have been loaded');
-		});
+			this.loop();
+		}.bind(this));
 
 	}
 
