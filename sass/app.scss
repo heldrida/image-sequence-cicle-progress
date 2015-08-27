@@ -36,7 +36,7 @@ body {
 			margin-left: -9px;
 			-ms-transform: rotate(-90deg);
 			@include transform(rotateZ(-90deg));
-			transform-origin: top center;
+			@include transform-origin(top center);
 
 			svg {
 				position: absolute;

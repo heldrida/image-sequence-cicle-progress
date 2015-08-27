@@ -87,6 +87,11 @@ body {
       -ms-transform: rotateZ(-90deg);
       -o-transform: rotateZ(-90deg);
       transform: rotateZ(-90deg);
+      -webkit-transform-origin: top center;
+      -khtml-transform-origin: top center;
+      -moz-transform-origin: top center;
+      -ms-transform-origin: top center;
+      -o-transform-origin: top center;
       transform-origin: top center; }
       .image-sequencer-box .progress-container .pointer svg {
         position: absolute;
