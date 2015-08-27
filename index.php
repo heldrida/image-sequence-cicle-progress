@@ -30,17 +30,18 @@
 		<div class="images-container">
 			<?php for ($i = 1; $i <= 342; $i++) : ?>
 				<?php if ($i < 10) : ?>
-				<img src="img/720x576/<?php echo '000' . $i; ?>.jpg" data-index="<?php echo $i ?>">
+				<img src="img/720x576_optim/<?php echo '000' . $i; ?>.jpg" data-index="<?php echo $i ?>">
 				<?php elseif ($i < 100) : ?>
-				<img src="img/720x576/<?php echo '00' . $i; ?>.jpg" data-index="<?php echo $i ?>">
+				<img src="img/720x576_optim/<?php echo '00' . $i; ?>.jpg" data-index="<?php echo $i ?>">
 				<?php else : ?>
-				<img src="img/720x576/<?php echo '0' . $i; ?>.jpg" data-index="<?php echo $i ?>">
+				<img src="img/720x576_optim/<?php echo '0' . $i; ?>.jpg" data-index="<?php echo $i ?>">
 				<?php endif; ?>
 			<?php endfor; ?>
 		</div>
 
 	</div>
 
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
 	<script type="text/javascript" src="js/app.js"></script>
 

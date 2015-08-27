@@ -23,6 +23,7 @@ body {
 		top: 0;
 		left: 0;
 		margin: 0 auto;
+		-ms-transform: rotate(270deg);
 		@include transform(rotateZ(270deg));
 		z-index: 2;
 
@@ -33,6 +34,7 @@ body {
 			width: 18px;
 			height: 50%;
 			margin-left: -9px;
+			-ms-transform: rotate(-90deg);
 			@include transform(rotateZ(-90deg));
 			transform-origin: top center;
 
