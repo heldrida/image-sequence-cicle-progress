@@ -35,6 +35,13 @@ Shoe360View.prototype = {
 		this.touchStart = 0;
 		this.touchEnd = 0;
 		this.throttleMs = 75;
+		this.queuedExecMs = 100;
+		this.queueFnManager = this.getQueueFnManagerInstance();
+
+		// todo: remember to place any functions that in the queue
+		this.queueFnManager.push(function () {
+			console.log('called queued fn()');
+		});
 
 	},
 
@@ -62,6 +69,9 @@ Shoe360View.prototype = {
 			this.emulateTouchEvents = false;
 			window.removeEventListener('touchstart', setEmulateTouchEvents);
 		}.bind(this), false);
+
+		// exec queued fn on page resize
+		window.addEventListener('resize', this.throttle(this.queueFnManager.exec.bind(this.queueFnManager), this.queuedExecMs));
 
 	},
 
@@ -243,6 +253,56 @@ Shoe360View.prototype = {
 					func.apply(t, a);
 				}
 		};
+	},
+
+	getQueueFnManagerInstance: function () {
+
+		var instance;
+
+		function QueueFnManager() {
+			this.queued = [];
+		}
+
+		QueueFnManager.prototype = {
+
+			push: function (fn) {
+
+				if (typeof fn === "function") {
+					this.queued.push(fn);
+				}
+
+			},
+
+			exec: function () {
+
+				if (this.queued.length === 0) {
+					return false;
+				}
+
+				this.queued.forEach(function (fn, index) {
+					if (typeof fn === "function") {
+						fn();
+					}
+				});
+
+			}
+
+		};
+
+		if (!instance) {
+
+			instance = new QueueFnManager();
+
+		}
+
+		return instance;
+
+	},
+
+	setProgressContainerSize: function () {
+
+
+
 	}
 
 };
