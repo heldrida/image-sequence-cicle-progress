@@ -12,6 +12,7 @@ Shoe360View.prototype = {
 		this.initVars();
 		this.attachEventListeners();
 		this.loop();
+		this.setProgressContainerSize();
 
 	},
 
@@ -31,17 +32,19 @@ Shoe360View.prototype = {
 		this.calcCircleStroke();
 		this.pointerOffsetDeg = 90;
 		this.pointer = document.querySelector('.pointer');
-		this.images = document.querySelectorAll('.images-container img');
+		this.pointerSVG = this.pointer.querySelector('svg');
+		this.imagesContainer = document.querySelector('.images-container');
+		this.images = this.imagesContainer.querySelectorAll('img');
 		this.touchStart = 0;
 		this.touchEnd = 0;
 		this.throttleMs = 75;
 		this.queuedExecMs = 100;
 		this.queueFnManager = this.getQueueFnManagerInstance();
+		this.progressContainer = document.querySelector('.progress-container');
+		this.svg = this.progressContainer.querySelector('svg');
 
-		// todo: remember to place any functions that in the queue
-		this.queueFnManager.push(function () {
-			console.log('called queued fn()');
-		});
+		// place any functions that should be exec on win resize in the queue manager
+		this.queueFnManager.push(this.setProgressContainerSize.bind(this));
 
 	},
 
@@ -301,8 +304,13 @@ Shoe360View.prototype = {
 
 	setProgressContainerSize: function () {
 
-
-
+		this.imageSequencerBox.style.width = this.progressContainer.style.width = this.imagesContainer.style.width = window.innerWidth + 'px';
+		this.imageSequencerBox.style.height = this.progressContainer.style.height = this.imagesContainer.style.height = window.innerWidth + 'px';
+		//this.svg.setAttribute('viewBox', '-8 -8 ' + window.innerWidth + ' ' + window.innerWidth);
+		this.pointer.style.height = (window.innerWidth / 2) + 'px';
+		this.pointer.style.width = (window.innerWidth * 0.03) + 'px';
+		this.pointer.style.marginLeft = -(window.innerWidth * 0.015) + 'px';
+		this.pointerSVG.style.width = this.pointerSVG.style.height = (window.innerWidth * 0.03) + 'px';
 	}
 
 };
