@@ -46,6 +46,9 @@
                                              (http://www.w3schools.com/cssref/css3_pr_animation.asp)
 
 ------------------------------------------------------------- */
+body {
+  background: #000; }
+
 .image-sequencer-box {
   width: 600px;
   height: 600px;
@@ -97,6 +100,6 @@
       display: none;
       width: 100%;
       height: auto;
-      position: relative;
+      position: absolute;
       top: 40px;
       left: 0; }

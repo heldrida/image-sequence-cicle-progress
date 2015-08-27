@@ -13,6 +13,8 @@ Shoe360View.prototype = {
 		this.attachEventListeners();
 		this.loop();
 
+		console.log('this.emulateTouchEvents', this.emulateTouchEvents);
+
 	},
 
 	initVars: function () {
@@ -56,6 +58,14 @@ Shoe360View.prototype = {
 
 		}
 
+		// detecting `touchscreen` is difficult, so we'll only set if indeed in use
+		// todo: re-add event listener on window resize and set emulateTouchEvents to true
+		window.addEventListener('touchstart', function setEmulateTouchEvents() {
+			this.emulateTouchEvents = false;
+			console.log('this.emulateTouchEvents set to FALSE');
+			window.removeEventListener('touchstart', setEmulateTouchEvents);
+		}.bind(this), false);
+
 	},
 
 	calcCircleStroke: function () {
@@ -98,6 +108,8 @@ Shoe360View.prototype = {
 		// todo: maybe it's better to change the zIndex using the `index` value that goes up
 		// and only when reaching the `end` hide all. This should perform a bit better then
 		// the current `hide all` display only current `index`
+		// notes: the problem with the suggestion above is that when touch left/right
+		// there's more operations to do
 		for (var i = 0; i < this.images.length; i++) {
 			this.images[i].style.display = 'none';
 
@@ -194,7 +206,7 @@ Shoe360View.prototype = {
 		var direction;
 
 		// detect if moving left or right
-		if (e.deltaX < 0) {
+		if (e.deltaX > 0) {
 
 			direction = 'left';
 
