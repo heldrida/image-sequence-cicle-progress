@@ -90,7 +90,7 @@ Shoe360View.prototype = {
 			deg = deg - this.pointerOffsetDeg;
 
 		//this.pointer.style.transform = 'rotateZ(' + deg + 'deg)';
-		this.pointer.style[Modernizr.prefixed('transform', this.style, false)] = 'rotateZ(' + deg + 'deg)';
+		this.pointer.style[Modernizr.prefixed('transform', this.style, false)] = 'rotate(' + deg + 'deg)';
 
 	},
 
