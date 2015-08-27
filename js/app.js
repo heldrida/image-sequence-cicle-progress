@@ -13,6 +13,7 @@ Shoe360View.prototype = {
 		this.attachEventListeners();
 		this.loop();
 		this.setProgressContainerSize();
+		this.preloadImages();
 
 	},
 
@@ -311,6 +312,26 @@ Shoe360View.prototype = {
 		this.pointer.style.width = (window.innerWidth * 0.03) + 'px';
 		this.pointer.style.marginLeft = -(window.innerWidth * 0.015) + 'px';
 		this.pointerSVG.style.width = this.pointerSVG.style.height = (window.innerWidth * 0.03) + 'px';
+
+	},
+
+	preloadImages: function () {
+
+		var imgLoad = imagesLoaded(this.imagesContainer);
+
+		imgLoad.on( 'progress', function( instance, image ) {
+			var result = image.isLoaded ? 'loaded' : 'broken';
+			console.log( 'image is ' + result + ' for ' + image.img.src );
+		});
+
+		imgLoad.on( 'done', function( instance ) {
+			console.log('DONE  - all images have been successfully loaded');
+		});
+
+		imgLoad.on( 'always', function( instance ) {
+			console.log('ALWAYS - all images have been loaded');
+		});
+
 	}
 
 };
