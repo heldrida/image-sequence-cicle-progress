@@ -47,6 +47,7 @@ Shoe360View.prototype = {
 		// place any functions that should be exec on win resize in the queue manager
 		this.queueFnManager.push(this.setProgressContainerSize.bind(this));
 
+		this.maxWidth = 800;
 	},
 
 	attachEventListeners: function () {
@@ -305,13 +306,15 @@ Shoe360View.prototype = {
 
 	setProgressContainerSize: function () {
 
-		this.imageSequencerBox.style.width = this.progressContainer.style.width = this.imagesContainer.style.width = window.innerWidth + 'px';
-		this.imageSequencerBox.style.height = this.progressContainer.style.height = this.imagesContainer.style.height = window.innerWidth + 'px';
+		var width = window.innerWidth > this.maxWidth ? this.maxWidth : window.innerWidth;
+
+		this.imageSequencerBox.style.width = this.progressContainer.style.width = this.imagesContainer.style.width = width  + 'px';
+		this.imageSequencerBox.style.height = this.progressContainer.style.height = this.imagesContainer.style.height = width  + 'px';
 		//this.svg.setAttribute('viewBox', '-8 -8 ' + window.innerWidth + ' ' + window.innerWidth);
-		this.pointer.style.height = (window.innerWidth / 2) + 'px';
-		this.pointer.style.width = (window.innerWidth * 0.03) + 'px';
-		this.pointer.style.marginLeft = -(window.innerWidth * 0.015) + 'px';
-		this.pointerSVG.style.width = this.pointerSVG.style.height = (window.innerWidth * 0.03) + 'px';
+		this.pointer.style.height = (width  / 2) + 'px';
+		this.pointer.style.width = (width  * 0.03) + 'px';
+		this.pointer.style.marginLeft = -(width  * 0.015) + 'px';
+		this.pointerSVG.style.width = this.pointerSVG.style.height = (width  * 0.03) + 'px';
 
 	},
 
