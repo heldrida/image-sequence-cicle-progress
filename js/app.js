@@ -320,17 +320,18 @@ Shoe360View.prototype = {
 		// todo: by default the container should not be visible, once loaded show it
 		var imgLoad = imagesLoaded(this.imagesContainer);
 
-		imgLoad.on( 'progress', function( instance, image ) {
+		/*
+		imgLoad.on('progress', function(instance, image) {
 			var result = image.isLoaded ? 'loaded' : 'broken';
 			console.log( 'image is ' + result + ' for ' + image.img.src );
 		});
 
-		imgLoad.on( 'done', function() {
+		imgLoad.on('done', function() {
 
 		});
+		*/
 
-		imgLoad.on( 'always', function( instance ) {
-			console.log('ALWAYS - all images have been loaded');
+		imgLoad.on('always', function(instance) {
 			this.loop();
 		}.bind(this));
 
